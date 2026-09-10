@@ -1,0 +1,41 @@
+<div class="grid grid-cols-4 gap-3.5">
+
+    @for (item of auctionStore.data(); track item.id) {
+
+    <a href="#">
+
+        <div class="relative w-full bg-gray-200 aspect-video rounded-lg overflow-hidden">
+
+            <app-carimage [imageUrl]="item.imageUrl">
+            </app-carimage>
+
+            <div class="absolute bottom-2 left-2">
+                <app-countdown [endDate]="item.auctionEnd">
+                </app-countdown>
+            </div>
+
+        </div>
+
+        <div class="flex justify-between items-center mt-4">
+            <h3 class="text-gray-700">
+                {{ item.make }} {{ item.model }}
+            </h3>
+
+            <p class="font-semibold text-sm">
+                {{ item.year }}
+            </p>
+        </div>
+
+    </a>
+
+    }
+
+</div>
+<div class="flex gap-2 justify-center align-middle mt-7">
+
+    <app-app-pagination [totalRecords]="auctionStore.totalRecords()" [rows]="auctionStore.pageSize()"
+        (pageChange)="onPageChange($event)" />
+    
+    
+    <app-auctionsort (sortChange)="onSortChange($event)" class="pt-1"/>
+</div>

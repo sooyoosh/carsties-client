@@ -1,0 +1,34 @@
+
+
+    <p-select [options]="sortOptions" [(ngModel)]="selectedSort" optionLabel="label" optionValue="value"
+        placeholder="Sort by" (onChange)="onSortChange()" class="w-52">
+        <ng-template #selectedItem let-selectedOption>
+            <div class="flex items-center gap-2">
+                <i [class]="'bi ' + selectedOption.icon"></i>
+                <span>{{ selectedOption.label }}</span>
+    
+            </div>
+    
+        </ng-template>
+        <ng-template #item let-option>
+            <div class="flex items-center gap-2">
+    
+                <i [class]="'bi ' + option.icon"></i>
+                <span>{{ option.label }}</span>
+            </div>
+    
+    
+        </ng-template>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </p-select>
+

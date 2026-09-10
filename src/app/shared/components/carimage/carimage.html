@@ -1,0 +1,16 @@
+<div class="relative w-full h-full overflow-hidden">
+
+  <img
+    [src]="imageUrl()"
+    alt="Image of car"
+    (load)="onImageLoad()"
+    class="w-full h-full object-cover
+           duration-700 ease-in-out
+           transition-all"
+    [class.blur-2xl]="isLoading()"
+    [class.scale-150]="isLoading()"
+    [class.blur-0]="!isLoading()"
+    [class.scale-100]="!isLoading()"
+  />
+
+</div>

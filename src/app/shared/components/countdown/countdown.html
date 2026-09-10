@@ -1,0 +1,20 @@
+<div
+  class="rounded-lg px-4 py-2 text-white font-semibold"
+  [class.bg-green-500]="!expired()"
+  [class.bg-red-500]="expired()"
+>
+  @if (!expired()) {
+
+    <div class="flex gap-2">
+      <span>{{ remaining().days }}d</span>
+      <span>{{ remaining().hours }}h</span>
+      <span>{{ remaining().minutes }}m</span>
+      <span>{{ remaining().seconds }}s</span>
+    </div>
+
+  } @else {
+
+    <span>Auction has ended</span>
+
+  }
+</div>
