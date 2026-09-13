@@ -1,5 +1,5 @@
-<p-select [options]="sortOptions" [ngModel]="auctionStore.orderBy()" optionLabel="label" optionValue="value"
-    placeholder="Sort by" (ngModelChange)="onSortChange($event)" class="w-52">
+<p-select [options]="filterOptions" [ngModel]="auctionStore.filterBy()" optionLabel="label" optionValue="value"
+    placeholder="Filter by" (ngModelChange)="onFilterChange($event)" class="w-52">
     <ng-template #selectedItem let-selectedOption>
         <div class="flex items-center gap-2">
             <i [class]="'bi ' + selectedOption.icon"></i>

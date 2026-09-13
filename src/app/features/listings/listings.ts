@@ -34,8 +34,11 @@ export class Listings implements OnInit {
   }
 
   onSortChange(orderBy: string): void {
-     this.auctionStore.sort(orderBy);
+    this.auctionStore.sort(orderBy);
   }
 
+  onFilterChange(filterBy: string): void {
+    this.auctionStore.filter(filterBy);
+  }
 
 }

@@ -30,6 +30,9 @@ export class AuctionService {
             : {}),
               ...(params.orderBy
           ? { orderBy: params.orderBy }
+          : {}),
+              ...(params.filterBy
+          ? { filterBy: params.filterBy }
           : {})
         }
       }

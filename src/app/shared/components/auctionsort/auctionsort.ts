@@ -1,5 +1,6 @@
 import { Component, output } from '@angular/core';
 import { SortOption } from '../../../core/interfaces/auctionSearchParams';
+import { AuctionStore } from '../../../core/services/auction-store';
 
 
 
@@ -12,6 +13,9 @@ import { SortOption } from '../../../core/interfaces/auctionSearchParams';
   styleUrl: './auctionsort.css',
 })
 export class Auctionsort {
+
+  constructor(public auctionStore: AuctionStore) {}
+
 
   sortOptions: SortOption[] = [
     {
@@ -33,10 +37,10 @@ export class Auctionsort {
 
   sortChange = output<string>();
 
-  selectedSort = 'new';
+  // selectedSort = 'new';
 
-  onSortChange(): void {
-    this.sortChange.emit(this.selectedSort);
+  onSortChange(value:string): void {
+    this.sortChange.emit(value);
   }
 
 

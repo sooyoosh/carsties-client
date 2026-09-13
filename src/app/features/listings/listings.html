@@ -1,3 +1,5 @@
+@if(auctionStore.data().length){
+
 <div class="grid grid-cols-4 gap-3.5">
 
     @for (item of auctionStore.data(); track item.id) {
@@ -31,11 +33,21 @@
     }
 
 </div>
+}
+@if(!auctionStore.data().length){
+<div class=" flex flex-col items-center justify-center gap-2">
+    <h2>no data has matched!!</h2>
+    <p-button label="Reset All Filter" severity="danger" (onClick)="this.auctionStore.reset()"/>
+</div>
+}
+
 <div class="flex gap-2 justify-center align-middle mt-7">
 
     <app-app-pagination [totalRecords]="auctionStore.totalRecords()" [rows]="auctionStore.pageSize()"
         (pageChange)="onPageChange($event)" />
-    
-    
-    <app-auctionsort (sortChange)="onSortChange($event)" class="pt-1"/>
+
+
+    <app-auctionsort (sortChange)="onSortChange($event)" class="pt-1" />
+
+    <app-auction-filter (filterChange)="onFilterChange( $event)"></app-auction-filter>
 </div>

@@ -18,10 +18,19 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { Auctionsort } from './shared/components/auctionsort/auctionsort';
 import { SelectModule } from 'primeng/select';
-
+import { AuctionFilter } from './shared/components/auction-filter/auction-filter';
 
 @NgModule({
-  declarations: [App, Navbar, Listings, Countdown, Carimage, AppPagination, Auctionsort],
+  declarations: [
+    App,
+    Navbar,
+    Listings,
+    Countdown,
+    Carimage,
+    AppPagination,
+    Auctionsort,
+    AuctionFilter,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,7 +39,7 @@ import { SelectModule } from 'primeng/select';
     InputTextModule,
     FloatLabelModule,
     FormsModule,
-    SelectModule
+    SelectModule,
   ],
   providers: [
     providePrimeNG({
