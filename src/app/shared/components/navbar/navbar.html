@@ -22,6 +22,32 @@
         </p-floatlabel>
 
     </div>
-    <div>login</div>
+    <!-- checking login -->
+    @if (isAuthenticated$ | async; as auth) {
+
+    @if (auth.isAuthenticated) {
+
+    @if (userData$ | async; as userData) {
+    <div class="flex items-center gap-3">
+        <span>{{ userData.userData?.name }}</span>
+
+        <button type="button" (click)="logout()" class="rounded bg-gray-800 px-4 py-2 text-white">
+            Logout
+        </button>
+    </div>
+    }
+
+    } @else {
+
+    <button type="button" (click)="login()" class="rounded bg-red-500 px-4 py-2 text-white">
+        Login
+    </button>
+
+    }
+
+    }
+    <!-- checking login -->
+
+
 
 </header>
