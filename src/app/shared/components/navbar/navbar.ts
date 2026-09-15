@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuctionStore } from '../../../core/services/auction-store';
 import { Auth } from '../../../core/services/auth';
 import { AuthenticatedResult, OidcSecurityService, UserDataResult } from 'angular-auth-oidc-client';
-import { Observable } from 'rxjs';
-
+import { Observable, take } from 'rxjs';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   styleUrl: './navbar.css',
 })
 export class Navbar implements OnInit {
-
+  menuItems: MenuItem[] = [];
   searchValue = '';
   userData$: Observable<UserDataResult>;
   isAuthenticated$: Observable<AuthenticatedResult>;
@@ -20,10 +20,55 @@ export class Navbar implements OnInit {
   constructor(private auctionStore: AuctionStore, private authService: Auth, public oidcSecurityService: OidcSecurityService) {
     this.userData$ = this.oidcSecurityService.userData$;
     this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$;
+    this.isAuthenticated$.subscribe(auth => {
+      console.log('AUTH STATE:', auth);
+    });
   }
 
   ngOnInit() {
+    //initial menu
+    this.menuItems = [
+      {
+        label: 'My Auctions',
+        icon: 'bi bi-car-front',
+        command: () => {
+          this.myAuctions();
+        }
+      },
+      {
+        label: 'Auctions Won',
+        icon: 'bi bi-trophy',
+        command: () => {
+          this.auctionsWon();
+        }
+      },
+      {
+        label: 'Sell My Car',
+        icon: 'bi bi-plus-circle',
+        command: () => {
 
+        },
+        routerLink: '/create'
+      },
+      {
+        label: 'Session',
+        icon: 'bi bi-person-check',
+        command: () => {
+          console.log('Session');
+        }
+      },
+      {
+        separator: true
+      },
+      {
+        label: 'Sign Out',
+        icon: 'bi bi-box-arrow-right',
+        command: () => {
+          this.logout();
+        }
+      }
+    ];
+    //initial menu
   }
 
 
@@ -42,16 +87,34 @@ export class Navbar implements OnInit {
   // logout(): void {
   //   this.authService.logout();
   // }
-    logout(): void {
-    console.log('LOGOUT START');
-
+  logout(): void {
     this.oidcSecurityService.logoff().subscribe({
       next: (result) => {
-        console.log('LOGOUT RESULT', result);
+        //
       },
       error: (error) => {
         console.error('LOGOUT ERROR', error);
       },
+    });
+  }
+
+  myAuctions(): void {
+    this.userData$.pipe(take(1)).subscribe(userData => {
+      const username = userData.userData?.username;
+
+      if (username) {
+        this.auctionStore.setSeller(username);
+      }
+    });
+  }
+
+  auctionsWon(): void {
+    this.userData$.pipe(take(1)).subscribe(userData => {
+      const username = userData.userData?.username;
+
+      if (username) {
+        this.auctionStore.setWinner(username);
+      }
     });
   }
 }

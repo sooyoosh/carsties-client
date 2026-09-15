@@ -1,0 +1,260 @@
+<form [formGroup]="auctionForm" (ngSubmit)="submit()" class="space-y-8">
+
+    <!-- Vehicle Information -->
+    <div>
+
+        <div class="mb-6 flex items-center gap-3">
+
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 text-red-500">
+                <i class="bi bi-car-front-fill text-xl"></i>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800">
+                    Vehicle Information
+                </h3>
+
+                <p class="text-sm text-gray-500">
+                    Tell us a little about your car
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+            <!-- Make -->
+            <div>
+
+                <label for="make" class="mb-2 block text-sm font-medium text-gray-700">
+                    Make
+                </label>
+
+                <input pInputText id="make" formControlName="make" placeholder="e.g. BMW" class="w-full"
+                    [class.ng-invalid]="isInvalid('make')" [class.ng-dirty]="isInvalid('make')" />
+
+                @if (isInvalid('make')) {
+                <small class="mt-1 block text-red-500">
+                    Make is required.
+                </small>
+                }
+
+            </div>
+
+
+            <!-- Model -->
+            <div>
+
+                <label for="model" class="mb-2 block text-sm font-medium text-gray-700">
+                    Model
+                </label>
+
+                <input pInputText id="model" formControlName="model" placeholder="e.g. M4 Competition" class="w-full"
+                    [class.ng-invalid]="isInvalid('model')" [class.ng-dirty]="isInvalid('model')" />
+
+                @if (isInvalid('model')) {
+                <small class="mt-1 block text-red-500">
+                    Model is required.
+                </small>
+                }
+
+            </div>
+
+
+            <!-- Year -->
+            <div>
+
+                <label for="year" class="mb-2 block text-sm font-medium text-gray-700">
+                    Year
+                </label>
+
+                <p-inputnumber inputId="year" formControlName="year" placeholder="e.g. 2024" [useGrouping]="false"
+                    [min]="1900" [max]="2030" styleClass="w-full" inputStyleClass="w-full"
+                    [class.ng-invalid]="isInvalid('year')" [class.ng-dirty]="isInvalid('year')">
+                </p-inputnumber>
+
+                @if (isInvalid('year')) {
+                <small class="mt-1 block text-red-500">
+                    Year is required.
+                </small>
+                }
+
+            </div>
+
+
+            <!-- Color -->
+            <div>
+
+                <label for="color" class="mb-2 block text-sm font-medium text-gray-700">
+                    Color
+                </label>
+
+                <input pInputText id="color" formControlName="color" placeholder="e.g. Black" class="w-full"
+                    [class.ng-invalid]="isInvalid('color')" [class.ng-dirty]="isInvalid('color')" />
+
+                @if (isInvalid('color')) {
+                <small class="mt-1 block text-red-500">
+                    Color is required.
+                </small>
+                }
+
+            </div>
+
+
+            <!-- Mileage -->
+            <div>
+
+                <label for="milleage" class="mb-2 block text-sm font-medium text-gray-700">
+                    Mileage
+                </label>
+
+                <p-inputnumber inputId="milleage" formControlName="milleage" placeholder="e.g. 25000" suffix=" km"
+                    [min]="0" styleClass="w-full" inputStyleClass="w-full">
+                </p-inputnumber>
+
+                @if (isInvalid('milleage')) {
+                <small class="mt-1 block text-red-500">
+                    Mileage is required.
+                </small>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Image -->
+    <div class="border-t border-gray-100 pt-8">
+
+        <div class="mb-5 flex items-center gap-3">
+
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-500">
+                <i class="bi bi-image text-xl"></i>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800">
+                    Vehicle Image
+                </h3>
+
+                <p class="text-sm text-gray-500">
+                    Add a URL for your vehicle image
+                </p>
+            </div>
+
+        </div>
+
+
+        <input pInputText id="imageUrl" formControlName="imageUrl" placeholder="https://example.com/car.jpg"
+            class="w-full" />
+
+        @if (isInvalid('imageUrl')) {
+        <small class="mt-1 block text-red-500">
+            Image URL is required.
+        </small>
+        }
+
+    </div>
+
+
+    <!-- Auction Information -->
+    <div class="border-t border-gray-100 pt-8">
+
+        <div class="mb-6 flex items-center gap-3">
+
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-50 text-amber-500">
+                <i class="bi bi-hammer text-xl"></i>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800">
+                    Auction Information
+                </h3>
+
+                <p class="text-sm text-gray-500">
+                    Set up your auction
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+            <!-- Reserve Price -->
+            <div>
+
+                <label for="reservePrice" class="mb-2 block text-sm font-medium text-gray-700">
+                    Reserve Price
+                </label>
+
+                <p-inputnumber inputId="reservePrice" formControlName="reservePrice" placeholder="e.g. 25000"
+                    prefix="$ " [min]="0" mode="decimal" styleClass="w-full" inputStyleClass="w-full">
+                </p-inputnumber>
+
+                @if (isInvalid('reservePrice')) {
+                <small class="mt-1 block text-red-500">
+                    Reserve price is required.
+                </small>
+                }
+
+            </div>
+
+
+            <!-- Auction End -->
+            <div>
+
+                <label for="auctionEnd" class="mb-2 block text-sm font-medium text-gray-700">
+                    Auction End
+                </label>
+                @if(isBrowser){
+                <p-datepicker inputId="auctionEnd" formControlName="auctionEnd" placeholder="Select auction end date"
+                    [showTime]="true" [hourFormat]="'24'" [showIcon]="true" [appendTo]="'body'" styleClass="w-full"
+                    inputStyleClass="w-full">
+                </p-datepicker>
+                }
+
+                @if (isInvalid('auctionEnd')) {
+                <small class="mt-1 block text-red-500">
+                    Auction end date is required.
+                </small>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Actions -->
+    <div class="flex items-center justify-end gap-3 border-t border-gray-100 pt-6">
+
+        <button type="button"
+            class="rounded-lg border border-gray-300 px-6 py-3 text-sm font-medium text-gray-700 transition hover:bg-gray-50">
+
+            Cancel
+
+        </button>
+
+
+        <button [disabled]="auctionForm.invalid" type="submit" class="flex items-center gap-2 rounded-lg bg-red-500 px-7 py-3 text-sm font-semibold text-white shadow-sm transition
+           hover:bg-red-600
+           disabled:cursor-not-allowed
+           disabled:bg-gray-300
+           disabled:text-gray-500
+           disabled:shadow-none">
+            
+
+            <i class="bi bi-plus-circle"></i>
+
+            Create Auction
+
+        </button>
+
+    </div>
+
+</form>

@@ -23,6 +23,18 @@ import { AuctionFilter } from './shared/components/auction-filter/auction-filter
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { AuthCallback } from './core/components/auth-callback/auth-callback';
 import { Home } from './features/home/home';
+import { MenuModule } from 'primeng/menu';
+import { Create } from './features/create/create';
+import { Detail } from './features/detail/detail';
+import { Update } from './features/update/update';
+import { AuctionForm } from './shared/components/auction-form/auction-form';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DatePickerModule } from 'primeng/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from 'angular-auth-oidc-client';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -36,6 +48,10 @@ import { Home } from './features/home/home';
     AuctionFilter,
     AuthCallback,
     Home,
+    Create,
+    Detail,
+    Update,
+    AuctionForm,
   ],
   imports: [
     BrowserModule,
@@ -47,19 +63,54 @@ import { Home } from './features/home/home';
     FloatLabelModule,
     FormsModule,
     SelectModule,
+    MenuModule,
+    InputNumberModule,
+    DatePickerModule,
+    ReactiveFormsModule,
+    ToastModule,
+    // AuthModule.forRoot({
+    //   config: {
+    //     authority: 'http://localhost:5001',
+    //     redirectUrl: 'http://localhost:4200/auth-callback',
+    //     postLogoutRedirectUri: 'http://localhost:4200',
+    //     clientId: 'angApp',
+    //     responseType: 'code',
+    //     scope: 'openid profile auctionApp',
+    //     secureRoutes: [
+    //       'http://localhost:5106/'
+    //     ],
+    //     logLevel: LogLevel.Debug,
+    //   },
+    // }),
     AuthModule.forRoot({
       config: {
         authority: 'http://localhost:5001',
         redirectUrl: 'http://localhost:4200/auth-callback',
         postLogoutRedirectUri: 'http://localhost:4200',
+
         clientId: 'angApp',
         responseType: 'code',
-        scope: 'openid profile auctionApp',
+
+        scope: 'openid profile auctionApp offline_access',
+
+        useRefreshToken: true,
+
+        secureRoutes: [
+          'http://localhost:5106/'
+        ],
+
         logLevel: LogLevel.Debug,
       },
     }),
   ],
   providers: [
+    MessageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+
     providePrimeNG({
       theme: {
         preset: Aura,
@@ -73,4 +124,4 @@ import { Home } from './features/home/home';
   ],
   bootstrap: [App],
 })
-export class AppModule {}
+export class AppModule { }

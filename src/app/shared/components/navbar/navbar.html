@@ -4,7 +4,7 @@
         <div>Carsties Auctions</div>
 
     </div> -->
-    <a href="#" (click)="onLogoClick(); $event.preventDefault()"
+    <a [routerLink]="''" (click)="onLogoClick(); $event.preventDefault()"
         class="flex items-center gap-2 text-2xl font-semibold text-red-500 cursor-pointer">
         <i class="bi bi-car-front-fill"></i>
         <div>Carsties Auctions</div>
@@ -23,7 +23,7 @@
 
     </div>
     <!-- checking login -->
-    @if (isAuthenticated$ | async; as auth) {
+    <!-- @if (isAuthenticated$ | async; as auth) {
 
     @if (auth.isAuthenticated) {
 
@@ -45,9 +45,48 @@
 
     }
 
+    } -->
+    <!-- checking login -->
+    <!-- checking login -->
+    @if (isAuthenticated$ | async; as auth) {
+
+    @if (auth.isAuthenticated) {
+
+    @if (userData$ | async; as userData) {
+
+ 
+    <div class="relative">
+
+        <button type="button" (click)="userMenu.toggle($event)"
+            class="flex items-center gap-2 rounded-lg px-3 py-2 text-gray-800 transition hover:bg-gray-100">
+
+            <i class="bi bi-person-circle text-xl"></i>
+
+            <span>
+                Welcome {{ userData.userData?.name }}
+            </span>
+
+            <i class="bi bi-chevron-down text-sm"></i>
+
+        </button>
+
+        <p-menu #userMenu [model]="menuItems" [popup]="true" appendTo="body" [style]="{ width: '220px' }">
+        </p-menu>
+
+    </div>
+    }
+
+    } @else {
+
+    <button type="button" (click)="login()" class="rounded bg-red-500 px-4 py-2 text-white">
+        Login
+    </button>
+
+    }
+
     }
     <!-- checking login -->
 
-
+    
 
 </header>

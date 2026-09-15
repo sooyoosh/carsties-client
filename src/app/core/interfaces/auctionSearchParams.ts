@@ -4,6 +4,8 @@ export interface AuctionSearchParams {
   pageSize?: number;
   orderBy?: string;
   filterBy?: string;
+  winner?: string;
+  seller?: string;
 }
 
 

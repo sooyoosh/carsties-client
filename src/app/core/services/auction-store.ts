@@ -17,6 +17,10 @@ export class AuctionStore {
   searchTerm = signal('');
   orderBy = signal('new');
   filterBy = signal('live');
+  winner=signal('');
+  seller=signal('');
+
+
 
   page = signal(1);
 
@@ -32,6 +36,8 @@ export class AuctionStore {
           searchTerm: searchTerm || undefined,
           orderBy: this.orderBy(),
           filterBy: this.filterBy(),
+          winner: this.winner(),
+          seller: this.seller(),
           pageNumber: 1,
           pageSize: this.pageSize()
         })
@@ -63,6 +69,16 @@ export class AuctionStore {
     this.loadPage(1, this.pageSize());
   }
 
+  setWinner(value:string):void{
+    this.winner.set(value);
+    this.loadPage(1, this.pageSize());
+  }
+
+  setSeller(value:string):void{
+    this.seller.set(value);
+    this.loadPage(1, this.pageSize());
+  }
+
 
   loadPage(page: number, pageSize: number): void {
 
@@ -73,6 +89,8 @@ export class AuctionStore {
       searchTerm: this.searchTerm() || undefined,
       orderBy: this.orderBy(),
       filterBy: this.filterBy(),
+      winner: this.winner(),
+      seller: this.seller(),
       pageNumber: page,
       pageSize
     }).subscribe(result => {
@@ -85,6 +103,8 @@ export class AuctionStore {
     this.searchTerm.set('');
     this.orderBy.set('new');
     this.filterBy.set('live');
+    this.winner.set('');
+    this.seller.set('');
 
     this.loadPage(1, this.pageSize());
   }

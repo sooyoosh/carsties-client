@@ -4,7 +4,7 @@
 
     @for (item of auctionStore.data(); track item.id) {
 
-    <a href="#">
+    <a [routerLink]="['/detail', item.id]">
 
         <div class="relative w-full bg-gray-200 aspect-video rounded-lg overflow-hidden">
 
