@@ -1,5 +1,12 @@
 @if (loading()) { <div class="flex min-h-[60vh] items-center justify-center"> <i
-        class="bi bi-arrow-repeat animate-spin text-4xl text-gray-400"></i> </div> } @else if (auction(); as auction) {
+        class="bi bi-arrow-repeat animate-spin text-4xl text-gray-400"></i> </div> }
+@else if (auction(); as auction) {
+    @if (isOwner()) {
+        <div class="flex justify-center mt-4 gap-1.5">
+            <p-button label="Update" [rounded]="true" severity="warn" (onClick)="goToUpdate(auction.id)" />
+            <p-button label="Delete" [rounded]="true" severity="danger" (onClick)="deleteAuction(auction.id)" />
+        </div>
+    }
 <div class="mx-auto max-w-5xl px-5 py-10">
     <div class="overflow-hidden rounded-2xl bg-white shadow-lg"> <!-- Image -->
         <div class="relative"> <img [src]="auction.imageUrl" [alt]="auction.make + ' ' + auction.model"
@@ -55,7 +62,8 @@
             </div>
         </div>
     </div>
-</div> } @else { <div class="flex min-h-[60vh] items-center justify-center">
+</div> }
+@else { <div class="flex min-h-[60vh] items-center justify-center">
     <div class="text-center"> <i class="bi bi-car-front text-5xl text-gray-300"></i>
         <h2 class="mt-4 text-xl font-semibold text-gray-700"> Auction not found </h2>
         <p class="mt-2 text-gray-500"> We couldn't find this auction. </p>

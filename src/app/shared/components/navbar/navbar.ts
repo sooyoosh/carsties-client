@@ -4,6 +4,7 @@ import { Auth } from '../../../core/services/auth';
 import { AuthenticatedResult, OidcSecurityService, UserDataResult } from 'angular-auth-oidc-client';
 import { Observable, take } from 'rxjs';
 import { MenuItem } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -17,12 +18,12 @@ export class Navbar implements OnInit {
   userData$: Observable<UserDataResult>;
   isAuthenticated$: Observable<AuthenticatedResult>;
 
-  constructor(private auctionStore: AuctionStore, private authService: Auth, public oidcSecurityService: OidcSecurityService) {
+  constructor(private auctionStore: AuctionStore, private authService: Auth, public oidcSecurityService: OidcSecurityService,
+    private route: ActivatedRoute, private router: Router
+  ) {
     this.userData$ = this.oidcSecurityService.userData$;
     this.isAuthenticated$ = this.oidcSecurityService.isAuthenticated$;
-    this.isAuthenticated$.subscribe(auth => {
-      console.log('AUTH STATE:', auth);
-    });
+
   }
 
   ngOnInit() {
@@ -73,6 +74,16 @@ export class Navbar implements OnInit {
 
 
   onSearch(value: string): void {
+
+    if (this.router.url !== '/') {
+
+      this.router.navigate(['/']).then(() => {
+        this.auctionStore.search(value);
+      });
+
+      return;
+    }
+
     this.auctionStore.search(value);
   }
 

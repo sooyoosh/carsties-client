@@ -4,6 +4,7 @@ import { AuthCallback } from './core/components/auth-callback/auth-callback';
 import { Home } from './features/home/home';
 import { Create } from './features/create/create';
 import { Detail } from './features/detail/detail';
+import { Update } from './features/update/update';
 
 const routes: Routes = [
 
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'detail/:id',
     component: Detail,
+  },
+  {
+    path: 'update/:id',
+    component: Update,
   },
 ];
 

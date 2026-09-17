@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Auction, PagedResult } from '../interfaces/pagedResult';
 import { AuctionSearchParams } from '../interfaces/auctionSearchParams';
 import { CreateAuction } from '../interfaces/createAuction';
+import { UpdateAuction } from '../interfaces/updateAuction';
 
 @Injectable({
   providedIn: 'root',
@@ -62,5 +63,20 @@ export class AuctionService {
       `${this.apiAuctionUrl}/${id}`
     )
   }
+ updateAuction(id:string, auction:UpdateAuction){
+
+ return this.http.put(
+   `${this.apiAuctionUrl}/${id}`,
+   auction
+ );
+
+}
+
+
+deleteAuction(id:string){
+ return this.http.delete(
+   `${this.apiAuctionUrl}/${id}`);
+}
+
 
 }

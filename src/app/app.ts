@@ -20,7 +20,9 @@ export class App {
     @Inject(PLATFORM_ID) private platformId: object
   ) {
     if (isPlatformBrowser(this.platformId)) {
-      this.authService.checkAuth().subscribe();
+      this.authService.checkAuth().subscribe(result => {
+        console.log('APP AUTH:', result);
+      });
     }
   }
 

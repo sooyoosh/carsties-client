@@ -68,33 +68,15 @@ import { ToastModule } from 'primeng/toast';
     DatePickerModule,
     ReactiveFormsModule,
     ToastModule,
-    // AuthModule.forRoot({
-    //   config: {
-    //     authority: 'http://localhost:5001',
-    //     redirectUrl: 'http://localhost:4200/auth-callback',
-    //     postLogoutRedirectUri: 'http://localhost:4200',
-    //     clientId: 'angApp',
-    //     responseType: 'code',
-    //     scope: 'openid profile auctionApp',
-    //     secureRoutes: [
-    //       'http://localhost:5106/'
-    //     ],
-    //     logLevel: LogLevel.Debug,
-    //   },
-    // }),
     AuthModule.forRoot({
       config: {
         authority: 'http://localhost:5001',
         redirectUrl: 'http://localhost:4200/auth-callback',
         postLogoutRedirectUri: 'http://localhost:4200',
-
         clientId: 'angApp',
         responseType: 'code',
-
         scope: 'openid profile auctionApp offline_access',
-
         useRefreshToken: true,
-
         secureRoutes: [
           'http://localhost:5106/'
         ],

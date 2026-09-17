@@ -7,9 +7,13 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 })
 export class Auth {
 
- constructor(
+  userData$;
+
+  constructor(
     private oidcSecurityService: OidcSecurityService
-  ) {}
+  ) {
+    this.userData$ = this.oidcSecurityService.userData$;
+   }
 
   checkAuth() {
     return this.oidcSecurityService.checkAuth();

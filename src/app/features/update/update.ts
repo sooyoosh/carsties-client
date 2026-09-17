@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-update',
@@ -6,4 +7,16 @@ import { Component } from '@angular/core';
   templateUrl: './update.html',
   styleUrl: './update.css',
 })
-export class Update {}
+export class Update implements OnInit{
+
+  constructor( private route: ActivatedRoute,){}
+
+  ngOnInit() {
+     const id = this.route.snapshot.paramMap.get('id');
+    
+     
+  }
+
+
+
+}
